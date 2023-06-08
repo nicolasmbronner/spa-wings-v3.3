@@ -39,4 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("helpButton element not found");
   }
   displayAllTotals();
+  
+  // Nouveau gestionnaire d'événements pour les clics sur les entrées
+  consoleOutput.addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("entry")) {
+      consoleInput.value = e.target.dataset.id + " ";
+    }
+  });
 });
