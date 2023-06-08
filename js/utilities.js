@@ -57,17 +57,24 @@ function processUserInput(input) {
         currentArray.push(number);
       } else if (item.includes('-')) {
         // If the item includes an ID (signified by '-'), update the corresponding entry
-        const [prefix, id, newValue] = item.split('-');
+        const parts = item.split('-');
+        const prefix = parts[0];
+        const id = parseInt(parts[1], 10);
         const arrayToUpdate = getArrayFromPrefix(prefix);
         if (arrayToUpdate && arrayToUpdate[id] !== undefined) {
-          if (newValue > 0) {
-            // If the new value is above 0, update the entry
-            arrayToUpdate[id] = newValue;
-            console.log(`Entry ${item} updated to ${newValue}`);
-          } else if (newValue === 0) {
-            // If the new value is 0, delete the entry
-            arrayToUpdate.splice(id, 1);
-            console.log(`Entry ${item} deleted`);
+          if (parts.length === 3) {
+            const newValue = parseFloat(parts[2]);
+            if (newValue > 0) {
+              // If the new value is above 0, update the entry
+              arrayToUpdate[id] = newValue;
+              console.log(`Entry ${item} updated to ${newValue}`);
+            } else if (newValue === 0) {
+              // If the new value is 0, delete the entry
+              arrayToUpdate.splice(id, 1);
+              console.log(`Entry ${item} deleted`);
+            }
+          } else {
+            console.log(`Invalid entry format: ${item}`);
           }
         }
       } else {
