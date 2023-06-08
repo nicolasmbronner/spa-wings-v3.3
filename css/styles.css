@@ -1,7 +1,7 @@
 body {
     font-family: monospace;
     font-size: 1.15rem;
-    background-color: white; /* #0A0B0E */
+    background-color: #0A0B0E;
     color: #FF00D6;
     margin: 0;
     display: flex;
