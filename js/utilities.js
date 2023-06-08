@@ -122,11 +122,11 @@ function processUserInput(input) {
 
 // New function to handle clicking on an entry
 function entryClicked(id) {
-  consoleInput.value = id + "-";
-  // This will move the cursor to the end of the input
+  consoleInput.value = id + " ";
   consoleInput.focus();
   consoleInput.setSelectionRange(consoleInput.value.length, consoleInput.value.length);
 }
+
 
 function getArrayFromPrefix(prefix) {
   switch (prefix) {
