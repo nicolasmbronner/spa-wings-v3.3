@@ -85,4 +85,14 @@ function entryClicked(id) {
   consoleInput.value = id + " ";
 }
 
+function getArrayFromPrefix(prefix) {
+  switch (prefix) {
+    case 'visa': return visaEntries;
+    case 'cash': return cashEntries;
+    case 'tipsh': return tipsHotelEntries;
+    case 'tipsv': return tipsVisaEntries;
+    default: return null;
+  }
+}
+
 
