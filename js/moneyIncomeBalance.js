@@ -34,20 +34,19 @@ function displayAllTotals() {
   clearConsole(); // Supprime l'affichage actuel avant d'afficher les nouvelles valeurs
 
   writeToConsole(`CASH Income : ${cashEntries.reduce((a, b) => a + b, 0)}`);
-  writeToConsole((cashEntries.length > 0 ? cashEntries.join(" ") : "-") + "<br>");
+  cashEntries.forEach((entry, index) => writeToConsole(entry.toString(), "cash-" + index));
 
   writeToConsole(`VISA Income : ${visaEntries.reduce((a, b) => a + b, 0)}`);
-  writeToConsole((visaEntries.length > 0 ? visaEntries.join(" ") : "-") + "<br>");
+  visaEntries.forEach((entry, index) => writeToConsole(entry.toString(), "visa-" + index));
 
   writeToConsole(`Tips HOTEL : ${tipsHotelEntries.reduce((a, b) => a + b, 0)}`);
-  writeToConsole((tipsHotelEntries.length > 0 ? tipsHotelEntries.join(" ") : "-") + "<br>");
+  tipsHotelEntries.forEach((entry, index) => writeToConsole(entry.toString(), "tipsh-" + index));
 
   writeToConsole(`Tips VISA : ${tipsVisaEntries.reduce((a, b) => a + b, 0)}`);
-  writeToConsole((tipsVisaEntries.length > 0 ? tipsVisaEntries.join(" ") : "-") + "<br>");
+  tipsVisaEntries.forEach((entry, index) => writeToConsole(entry.toString(), "tipsv-" + index));
 
   displayAdminInfo(); // Met à jour les informations d'administration
 }
-
 
 
 
