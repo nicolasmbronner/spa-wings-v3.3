@@ -7,17 +7,26 @@ const consoleInput = document.querySelector("#consoleInput");
 
 const contentAddedEvent = new Event("contentadded");
 
+let entryIdCounter = 0;
+let fianza = 500; // Initialise fianza à 500
+
 
 
 // ---------- GESTION DE L'AFFICHAGE
 
-function writeToConsole(text) {
-    if (consoleOutput) {
-        consoleOutput.innerHTML += text + "<br>";
-        consoleOutput.dispatchEvent(contentAddedEvent);
-    } else {
-        console.error("consoleOutput element not found");
+function writeToConsole(text, id = null) {
+  if (consoleOutput) {
+    let output = text;
+    // Si un ID est fourni, crée un élément div cliquable avec l'ID en attribut de données
+    if (id !== null) {
+      output = `<div class="entry" data-id="${id}" onclick="entryClicked(${id})">${text}</div>`;
     }
+
+    consoleOutput.innerHTML += output + "<br>";
+    consoleOutput.dispatchEvent(contentAddedEvent);
+  } else {
+    console.error("consoleOutput element not found");
+  }
 }
 
 function clearConsole() {
@@ -37,7 +46,13 @@ function processUserInput(input) {
   let currentArray = null;
 
   inputArray.forEach(item => {
-    if (isNaN(item)) {
+    if (item.indexOf('f') !== -1) { // Check for 'f' in the input
+      const newFianza = parseFloat(item.slice(0, -1));
+      if (!isNaN(newFianza)) { // Check if the part before 'f' is a valid number
+        fianza = newFianza;
+        console.log(`Fianza updated to ${fianza}`);
+      }
+    } else if (isNaN(item)) {
       const letter = item.slice(-1).toLowerCase();
       const number = parseFloat(item.slice(0, -1));
 
@@ -76,6 +91,11 @@ function processUserInput(input) {
 
   displayAllTotals();
   displayAdminInfo();
+}
+
+// New function to handle clicking on an entry
+function entryClicked(id) {
+  consoleInput.value = id + " ";
 }
 
 
