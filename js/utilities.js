@@ -126,7 +126,7 @@ function entryClicked(id) {
   setTimeout(() => {
     consoleInput.focus();
     consoleInput.setSelectionRange(consoleInput.value.length, consoleInput.value.length);
-  }, 0);
+  }, 100);
 }
 
 
