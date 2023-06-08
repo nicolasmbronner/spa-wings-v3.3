@@ -116,3 +116,10 @@ body {
     cursor: pointer;
     margin-left: 5px;
 }
+
+.entry {
+  cursor: pointer;
+}
+.entry:hover {
+  background-color: #ddd;
+}
