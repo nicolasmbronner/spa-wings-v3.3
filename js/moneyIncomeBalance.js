@@ -8,7 +8,6 @@ function displayAdminInfo() {
   const totalVisa = visaEntries.reduce((a, b) => a + b, 0);
   const totalTipsHotel = tipsHotelEntries.reduce((a, b) => a + b, 0);
   const totalTipsVisa = tipsVisaEntries.reduce((a, b) => a + b, 0);
-  const fianza = 500;
 
   let cashToDeclare = totalCash - totalTipsHotel - totalTipsVisa + fianza;
   let visaToDeclare = totalVisa;
