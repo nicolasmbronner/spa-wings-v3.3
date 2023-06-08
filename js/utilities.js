@@ -49,12 +49,34 @@ function processUserInput(input) {
     if (item.indexOf('f') !== -1) { 
       // ... existing code here
     } else if (isNaN(item)) {
-      // ... existing code here
-    } else {
-      const number = parseFloat(item);
-      if (currentArray !== null) {
-        // If it's a valid number, add it to the current array
-        currentArray.push(number);
+      const letter = item.slice(-1).toLowerCase();
+      const number = parseFloat(item.slice(0, -1));
+      const arrayPrefixes = ['v', 'c', 'h', 'tv', 'th'];
+
+      if (arrayPrefixes.includes(letter)) {
+        switch (letter) {
+          case "v":
+            if (item.slice(-2).toLowerCase() === "tv") {
+              tipsVisaEntries.push(number);
+              currentArray = tipsVisaEntries;
+            } else {
+              visaEntries.push(number);
+              currentArray = visaEntries;
+            }
+            break;
+          case "c":
+            cashEntries.push(number);
+            currentArray = cashEntries;
+            break;
+          case "h":
+            if (item.slice(-2).toLowerCase() === "th") {
+              tipsHotelEntries.push(number);
+              currentArray = tipsHotelEntries;
+            }
+            break;
+          default:
+            console.log(`Unrecognised letter: ${letter}`);
+        }
       } else if (item.includes('-')) {
         // If the item includes an ID (signified by '-'), update the corresponding entry
         const parts = item.split('-');
@@ -77,6 +99,13 @@ function processUserInput(input) {
             console.log(`Invalid entry format: ${item}`);
           }
         }
+      } else {
+        console.log("Invalid input");
+      }
+    } else {
+      const number = parseFloat(item);
+      if (currentArray !== null) {
+        currentArray.push(number);
       } else {
         console.log("No array has been defined");
       }
