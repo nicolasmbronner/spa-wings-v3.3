@@ -19,7 +19,7 @@ function writeToConsole(text, id = null) {
     let output = text;
     // Si un ID est fourni, crée un élément div cliquable avec l'ID en attribut de données
     if (id !== null) {
-      output = `<div class="entry" data-id="${id}" onclick="entryClicked(${id})">${text}</div>`;
+      output = `<div class="entry" data-id="${id}">${text}</div>`;
     }
 
     consoleOutput.innerHTML += output + "<br>";
