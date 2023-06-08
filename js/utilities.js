@@ -123,8 +123,10 @@ function processUserInput(input) {
 // New function to handle clicking on an entry
 function entryClicked(id) {
   consoleInput.value = id + " ";
-  consoleInput.focus();
-  consoleInput.setSelectionRange(consoleInput.value.length, consoleInput.value.length);
+  setTimeout(() => {
+    consoleInput.focus();
+    consoleInput.setSelectionRange(consoleInput.value.length, consoleInput.value.length);
+  }, 0);
 }
 
 
