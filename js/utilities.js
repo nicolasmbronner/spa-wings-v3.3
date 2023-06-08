@@ -46,8 +46,12 @@ function processUserInput(input) {
   let currentArray = null;
 
   inputArray.forEach(item => {
-    if (item.indexOf('f') !== -1) { 
-      // ... existing code here
+    if (item.indexOf('f') !== -1) {
+      // Check if the fianza value needs to be updated
+      const possibleFianza = parseFloat(item.slice(0, -1));
+      if (!isNaN(possibleFianza)) {
+        fianza = possibleFianza;
+      }
     } else if (isNaN(item)) {
       const letter = item.slice(-1).toLowerCase();
       const number = parseFloat(item.slice(0, -1));
@@ -84,8 +88,8 @@ function processUserInput(input) {
         const id = parseInt(parts[1], 10);
         const arrayToUpdate = getArrayFromPrefix(prefix);
         if (arrayToUpdate && arrayToUpdate[id] !== undefined) {
-          if (parts.length === 3) {
-            const newValue = parseFloat(parts[2]);
+          if (parts.length === 2) {
+            const newValue = parseFloat(inputArray[inputArray.indexOf(item) + 1]);
             if (newValue > 0) {
               // If the new value is above 0, update the entry
               arrayToUpdate[id] = newValue;
