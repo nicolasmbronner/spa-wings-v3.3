@@ -46,43 +46,30 @@ function processUserInput(input) {
   let currentArray = null;
 
   inputArray.forEach(item => {
-    if (item.indexOf('f') !== -1) { // Check for 'f' in the input
-      const newFianza = parseFloat(item.slice(0, -1));
-      if (!isNaN(newFianza)) { // Check if the part before 'f' is a valid number
-        fianza = newFianza;
-        console.log(`Fianza updated to ${fianza}`);
-      }
+    if (item.indexOf('f') !== -1) { 
+      // ... existing code here
     } else if (isNaN(item)) {
-      const letter = item.slice(-1).toLowerCase();
-      const number = parseFloat(item.slice(0, -1));
-
-      switch (letter) {
-        case "v":
-          if (item.slice(-2).toLowerCase() === "tv") {
-            tipsVisaEntries.push(number);
-            currentArray = tipsVisaEntries;
-          } else {
-            visaEntries.push(number);
-            currentArray = visaEntries;
-          }
-          break;
-        case "c":
-          cashEntries.push(number);
-          currentArray = cashEntries;
-          break;
-        case "h":
-          if (item.slice(-2).toLowerCase() === "th") {
-            tipsHotelEntries.push(number);
-            currentArray = tipsHotelEntries;
-          }
-          break;
-        default:
-          console.log(`Unrecognised letter: ${letter}`);
-      }
+      // ... existing code here
     } else {
       const number = parseFloat(item);
       if (currentArray !== null) {
+        // If it's a valid number, add it to the current array
         currentArray.push(number);
+      } else if (item.includes('-')) {
+        // If the item includes an ID (signified by '-'), update the corresponding entry
+        const [prefix, id, newValue] = item.split('-');
+        const arrayToUpdate = getArrayFromPrefix(prefix);
+        if (arrayToUpdate && arrayToUpdate[id] !== undefined) {
+          if (newValue > 0) {
+            // If the new value is above 0, update the entry
+            arrayToUpdate[id] = newValue;
+            console.log(`Entry ${item} updated to ${newValue}`);
+          } else if (newValue === 0) {
+            // If the new value is 0, delete the entry
+            arrayToUpdate.splice(id, 1);
+            console.log(`Entry ${item} deleted`);
+          }
+        }
       } else {
         console.log("No array has been defined");
       }
