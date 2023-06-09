@@ -118,6 +118,10 @@ function processUserInput(input) {
 
   displayAllTotals();
   displayAdminInfo();
+  
+  setTimeout(() => {
+    consoleInput.focus();
+  }, 100);
 }
 
 // New function to handle clicking on an entry
